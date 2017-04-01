@@ -29,6 +29,8 @@ public class Problem5 {
 	}
 
 	//Removes duplicates from list
+	// JA: It is easier to replicate the arraylist without the duplicates
+	// JA: This logic will leave duplicates when they appear more than once in sequence
 	public static void removeDuplicate(ArrayList<Integer> list) {
 		for (int i = 0; i < list.size() - 1; i++) {
 			for (int j = i + 1; j < list.size(); j++) {
