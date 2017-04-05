@@ -5,7 +5,7 @@ public class Triangle
 		private double side2;
 		private double side3;
 				
-		//Create a default object
+		//Create default object
 		Triangle() {
 			side1 = side2 = side3 = 1.0;
 		}
@@ -46,6 +46,5 @@ public class Triangle
 			return "Triangle: side1 = " + side1 + " side2 = " + side2 +
 				" side3 = " + side3;
 		}
-				
 
 }
