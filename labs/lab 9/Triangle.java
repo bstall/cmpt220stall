@@ -11,7 +11,11 @@ public class Triangle
 		}
 
 		//Construct a triangle with specified sides
-		Triangle(double side1, double side2, double side3) { 
+		Triangle(double side1, double side2, double side3) throws IllegalTriangleException { // JA 
+			// JA: This method should throw an exception when the rule is broken
+			if (side1 + side2 < side3 || side1 + side3 < side2 || side2 + side3 < side1){
+				throw new IllegalTriangleException(side1, side2, side3);
+			}
 			this.side1 = side1;
 			this.side2 = side2;
 			this.side3 = side3;
