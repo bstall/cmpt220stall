@@ -3,6 +3,26 @@ import java.util.Random;
 
 public class GuessWho {
 
+	public static Character charWithName(Character board[][], String name){
+		
+		for(int i = 0; i < board.length; ++i){
+			
+			for(int j = 0; j < board.length; ++j){
+				
+				if(board[i][j].getName().equals(name.trim())){
+					
+					return board[i][j];
+					
+				}
+				
+			}
+			
+		}
+		
+		return null;
+		
+	}
+	
 	public static void flipWithTrait(Character board[][], String trait) {
 
 		for (int i = 0; i < board.length; ++i) {
@@ -161,7 +181,7 @@ public class GuessWho {
 
 		int rand = generator.nextInt(36);
 
-		// we have to initialize computer to null but the nested for-loops
+		// we have to initialize computer to null but the nested for loops
 		// guarantee an actual selection
 
 		Character computer = null;
@@ -187,18 +207,18 @@ public class GuessWho {
 		}
 
 		Scanner reader = new Scanner(System.in);
-		//User input
+		
 		while (!gameWon) {
 			
 			System.out.println("Here is the current board state: ");
 			printBoard(board);
-			System.out.println("Name or trait?");
-			String userAns = reader.next();
+			System.out.println("Name, trait, or help?");
+			String userAns = reader.nextLine();
 
 			if (userAns.equalsIgnoreCase("name")) {
 
 				System.out.println("What's your guess? ");
-				String guess = reader.next();
+				String guess = reader.nextLine();
 				if (computer.getName().equalsIgnoreCase(guess)) {
 
 					gameWon = true;
@@ -216,7 +236,7 @@ public class GuessWho {
 			else if (userAns.equalsIgnoreCase("trait")) {
 
 				System.out.println("What trait would you like to ask about? ");
-				String trait = reader.next();
+				String trait = reader.nextLine();
 
 				if (computer.hasTrait(trait)) {
 
@@ -235,6 +255,16 @@ public class GuessWho {
 				
 			}
 
+			else if(userAns.equalsIgnoreCase("help")){
+				
+				System.out.println("What character would you like to find out more about?");
+				String character = reader.nextLine();
+				
+				Character helper = charWithName(board, character);
+				System.out.println(helper.getFullInfo());
+				
+			}
+			
 		}
 		
 		System.out.println("Congratulations! You've guessed that the computer's Character was " + computer.getName() + "!");
