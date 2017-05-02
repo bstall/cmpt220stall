@@ -51,6 +51,20 @@ public class Character {
 		
 	}
 	
+	public String getFullInfo(){
+		
+		String info = "";
+		
+		info += "Character Name: " + CharacterName + "\n";
+		info += "Faction: " + Faction + "\n";
+		info += "Race: " + Race + "\n";
+		info += "Class: " + Class + "\n";
+		info += "Gender: " + Gender + "\n";
+		
+		return info;
+		
+	}
+	
 	public String getName() {
 		return CharacterName;
 	}
