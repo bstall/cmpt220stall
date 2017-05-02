@@ -3,34 +3,56 @@ import java.util.Random;
 
 public class GuessWho {
 
-	public static Character charWithName(Character board[][], String name){
-		
-		for(int i = 0; i < board.length; ++i){
-			
-			for(int j = 0; j < board.length; ++j){
-				
-				if(board[i][j].getName().equals(name.trim())){
-					
+	public static Character charWithName(Character board[][], String name) {
+
+		for (int i = 0; i < board.length; ++i) {
+
+			for (int j = 0; j < board[i].length; ++j) {
+
+				if (board[i][j].getName().equals(name.trim())) {
+
 					return board[i][j];
-					
+
 				}
-				
+
 			}
-			
+
 		}
-		
+
 		return null;
-		
+
 	}
-	
+
+	public static void traitList(Character board[][], String trait) {
+
+		String list = "";
+
+		for (int i = 0; i < board.length; ++i) {
+
+			for (int j = 0; j < board[i].length; ++j) {
+
+				if (board[i][j].hasTrait(trait)) {
+
+					list += "[ " + board[i][j].getName() + " ]";
+
+				}
+
+			}
+
+		}
+
+		System.out.println(list);
+
+	}
+
 	public static void flipWithTrait(Character board[][], String trait) {
 
 		for (int i = 0; i < board.length; ++i) {
 
 			for (int j = 0; j < board[i].length; ++j) {
 
-				//if the Character does have the trait and is UP
-				
+				// if the Character does have the trait and is UP
+
 				if (board[i][j].hasTrait(trait)) {
 
 					board[i][j].flipDown();
@@ -49,8 +71,8 @@ public class GuessWho {
 
 			for (int j = 0; j < board[i].length; ++j) {
 
-				//if the Character does not have the trait and is UP
-				
+				// if the Character does not have the trait and is UP
+
 				if (!board[i][j].hasTrait(trait)) {
 
 					board[i][j].flipDown();
@@ -60,33 +82,33 @@ public class GuessWho {
 			}
 
 		}
-		
+
 	}
 
 	public static void printBoard(Character board[][]) {
 
-		for(int i = 0; i < board.length; ++i){
-			
-			for(int j = 0; j < board[i].length; ++j){
-				
-				if(board[i][j].status()){
-					
+		for (int i = 0; i < board.length; ++i) {
+
+			for (int j = 0; j < board[i].length; ++j) {
+
+				if (board[i][j].status()) {
+
 					System.out.print("[ " + board[i][j].getName() + " ]");
-					
+
 				}
-				
-				else{
-					
+
+				else {
+
 					System.out.print("[ ]");
-					
+
 				}
-				
+
 			}
-			
+
 			System.out.println();
-			
+
 		}
-		
+
 	}
 
 	public static void main(String args[]) {
@@ -207,9 +229,9 @@ public class GuessWho {
 		}
 
 		Scanner reader = new Scanner(System.in);
-		
+
 		while (!gameWon) {
-			
+
 			System.out.println("Here is the current board state: ");
 			printBoard(board);
 			System.out.println("Name, trait, or help?");
@@ -228,6 +250,7 @@ public class GuessWho {
 				else {
 
 					System.out.println("Sorry, that's not the right Character!");
+					flipWithTrait(board, guess);
 
 				}
 
@@ -246,28 +269,46 @@ public class GuessWho {
 
 				}
 
-				else{
-					
-					System.out.println("The computer's character does not have that trait! Flipping down all characters that do.");
+				else {
+
+					System.out.println(
+							"The computer's character does not have that trait! Flipping down all characters that do.");
 					flipWithTrait(board, trait);
-							
+
+				}
+
+			}
+
+			else if (userAns.equalsIgnoreCase("help")) {
+
+				System.out.println("Would you like to know more about a trait or a character?");
+				String help = reader.nextLine();
+
+				if (help.equalsIgnoreCase("character")) {
+
+					System.out.println("What character would you like to find out more about?");
+					String character = reader.nextLine();
+
+					Character helper = charWithName(board, character);
+					System.out.println(helper.getFullInfo());
+
+				}
+
+				else if(help.equalsIgnoreCase("trait")){
+					
+					System.out.println("What trait would you like to find out more about?");
+					String trait = reader.nextLine();
+					
+					traitList(board, trait);
+					
 				}
 				
 			}
 
-			else if(userAns.equalsIgnoreCase("help")){
-				
-				System.out.println("What character would you like to find out more about?");
-				String character = reader.nextLine();
-				
-				Character helper = charWithName(board, character);
-				System.out.println(helper.getFullInfo());
-				
-			}
-			
 		}
-		
-		System.out.println("Congratulations! You've guessed that the computer's Character was " + computer.getName() + "!");
+
+		System.out.println(
+				"Congratulations! You've guessed that the computer's Character was " + computer.getName() + "!");
 		reader.close();
 
 	}
