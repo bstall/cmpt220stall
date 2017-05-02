@@ -22,7 +22,7 @@ public class GuessWho {
 		return null;
 
 	}
-
+	//Displays character traits
 	public static void traitList(Character board[][], String trait) {
 
 		String list = "";
@@ -44,7 +44,7 @@ public class GuessWho {
 		System.out.println(list);
 
 	}
-
+	//Flips the characters with trait
 	public static void flipWithTrait(Character board[][], String trait) {
 
 		for (int i = 0; i < board.length; ++i) {
@@ -64,7 +64,7 @@ public class GuessWho {
 		}
 
 	}
-
+	//Flips characters who don't have the trait
 	public static void flipWithoutTrait(Character board[][], String trait) {
 
 		for (int i = 0; i < board.length; ++i) {
@@ -84,7 +84,7 @@ public class GuessWho {
 		}
 
 	}
-
+	//Displays board
 	public static void printBoard(Character board[][]) {
 
 		for (int i = 0; i < board.length; ++i) {
@@ -195,7 +195,13 @@ public class GuessWho {
 		// Instructions and intro
 		System.out.println(
 				"Welcome to World of Warcraft Guess Who!\n" + "At the beginning of each turn please indicate whether "
-						+ "you will guess a name or trait.\n" + "To win the game you guess the computer's character.");
+						+ "you will guess a name or trait.\n" + "To win the game you guess the computer's character.\n"
+						+ "To ask for a character's traits, use the help command.\n"
+						+ "The factions are horde, alliance or neither.\n"
+						+ "The races are human, night elf, draenei, dwarf, gnome, worgen, \n"
+						+ "pandaren, undead, orc, troll, tauren, goblin, and blood elf.\n"
+						+ "The classes are mage, warrior, druid, priest, paladin, monk, \n"
+						+ "hunter, warlock, shaman, rogue, death knight, and demon hunter.");
 
 		boolean gameWon = false;
 
@@ -229,14 +235,15 @@ public class GuessWho {
 		}
 
 		Scanner reader = new Scanner(System.in);
-
+		//Game loop
 		while (!gameWon) {
 
 			System.out.println("Here is the current board state: ");
 			printBoard(board);
 			System.out.println("Name, trait, or help?");
 			String userAns = reader.nextLine();
-
+			
+			//If user wants to guess a name
 			if (userAns.equalsIgnoreCase("name")) {
 
 				System.out.println("What's your guess? ");
@@ -248,14 +255,15 @@ public class GuessWho {
 				}
 
 				else {
-
+					//Flips down wrong character guesses
 					System.out.println("Sorry, that's not the right Character!");
 					flipWithTrait(board, guess);
 
 				}
 
 			}
-
+			
+			//If user wants to ask about a trait
 			else if (userAns.equalsIgnoreCase("trait")) {
 
 				System.out.println("What trait would you like to ask about? ");
@@ -278,7 +286,7 @@ public class GuessWho {
 				}
 
 			}
-
+			//Displays attributes of character the user asks for
 			else if (userAns.equalsIgnoreCase("help")) {
 
 				System.out.println("Would you like to know more about a trait or a character?");
@@ -293,7 +301,8 @@ public class GuessWho {
 					System.out.println(helper.getFullInfo());
 
 				}
-
+				
+				//Displays characters with trait
 				else if(help.equalsIgnoreCase("trait")){
 					
 					System.out.println("What trait would you like to find out more about?");
